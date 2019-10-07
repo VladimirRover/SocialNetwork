@@ -40,14 +40,16 @@ public class MainController {
 
     @PostMapping("/main")
     public String addMessage(
+            @RequestParam(required = false, defaultValue = "") String filter,
             @AuthenticationPrincipal User user,
             @RequestParam String text,
             @RequestParam String tag,
-            Map<String, Object> model) {
+            Model model) {
         Message message = new Message(text, tag, user);
         repository.save(message);
         Iterable<Message> messages = repository.findAll();
-        model.put("messages", messages);
+        model.addAttribute("messages", messages);
+        model.addAttribute("filter", filter);
         return "main";
     }
 }
