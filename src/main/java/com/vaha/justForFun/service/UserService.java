@@ -41,8 +41,8 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
 
         if (!StringUtils.isEmpty(user.getEmail())) {
-            String message = String.format("Hello, %s, \n" +
-                    "Welcome to web app. Please visit next link: http://localhost:8080/activate/%s, " +
+            String message = String.format("Hello, %s! \n" +
+                    "Welcome to web app. Please visit next link: http://localhost:8080/activate/%s",
                     user.getUsername(), user.getActivationCode());
             mailSender.send(user.getEmail(), "Activation code", message);
         }
