@@ -19,6 +19,11 @@
             <form method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <input type="text" class="form-control" name="text" placeholder="Insert text"/>
+                    <#if textError??>
+                        <div class="invalid-feedback">
+                            Please provide a valid state
+                        </div>
+                    </#if>
                 </div>
 
                 <div class="form-group">
