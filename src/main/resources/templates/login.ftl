@@ -2,6 +2,8 @@
 <#import "parts/login.ftl" as l>
 
 <@c.page>
-    ${message?ifExists}
+    <#if Sesion?? && Session.SPRING_SECURITY_LAST_EXCEPTION??>
+        ${Session.SPRING_SECURITY_LAST_EXCEPTION.message}
+    </#if>
     <@l.login "/login" false/>
 </@c.page>

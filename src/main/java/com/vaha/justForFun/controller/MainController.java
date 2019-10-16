@@ -60,6 +60,7 @@ public class MainController {
         if (bindingResult.hasErrors()) {
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
             model.mergeAttributes(errorsMap);
+            model.addAttribute("message", message);
         } else {
             if (file != null && !file.getOriginalFilename().isEmpty()) {
                 File uploadDir = new File(uploadPath);
@@ -71,6 +72,8 @@ public class MainController {
                 file.transferTo(new File(uploadPath + "/" + resultFilename));
                 message.setFilename(resultFilename);
             }
+
+            model.addAttribute("message", null);
             repository.save(message);
         }
         Iterable<Message> messages = repository.findAll();
