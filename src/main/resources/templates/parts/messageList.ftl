@@ -1,6 +1,6 @@
 <#include "security.ftl">
 
-<div class="card-columns">
+<div class="card-columns" id="messages-list">
     <#list messages as message>
         <div class="card my-3">
             <#if message.filename??>
