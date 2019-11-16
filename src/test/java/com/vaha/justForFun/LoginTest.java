@@ -1,6 +1,5 @@
 package com.vaha.justForFun;
 
-import com.vaha.justForFun.controller.MainController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
