@@ -2,6 +2,7 @@ package com.vaha.justForFun.controller;
 
 import com.vaha.justForFun.domain.Message;
 import com.vaha.justForFun.domain.User;
+import com.vaha.justForFun.domain.dto.MessageDto;
 import com.vaha.justForFun.repository.MessageRepository;
 import com.vaha.justForFun.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +48,9 @@ public class MessageController {
     public String main(
             @RequestParam(required = false, defaultValue = "") String filter,
             Model model,
-            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) {
-        Page<Message> page = messageService.messageList(pageable, filter);
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
+            @AuthenticationPrincipal User user) {
+        Page<MessageDto> page = messageService.messageList(pageable, filter, user);
 
         model.addAttribute("page", page);
         model.addAttribute("url", "/main");
@@ -101,7 +103,7 @@ public class MessageController {
             @RequestParam(required = false) Message message,
             @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
     ) {
-        Page<Message> page = messageService.messageListForUser(pageable, author);
+        Page<MessageDto> page = messageService.messageListForUser(pageable, author, currentUser);
         model.addAttribute("userChannel", author);
         model.addAttribute("subscriptionsCount", author.getSubscriptions().size());
         model.addAttribute("subscribersCount", author.getSubscribers().size());

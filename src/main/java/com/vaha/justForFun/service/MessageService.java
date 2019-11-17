@@ -1,7 +1,7 @@
 package com.vaha.justForFun.service;
 
-import com.vaha.justForFun.domain.Message;
 import com.vaha.justForFun.domain.User;
+import com.vaha.justForFun.domain.dto.MessageDto;
 import com.vaha.justForFun.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,17 +14,17 @@ public class MessageService {
     @Autowired
     private MessageRepository messageRepository;
 
-    public Page<Message> messageList(Pageable pageable, String filter){
+    public Page<MessageDto> messageList(Pageable pageable, String filter, User user){
 
         if (filter != null && !filter.isEmpty()) {
-            return messageRepository.findByTag(filter, pageable);
+            return messageRepository.findByTag(filter, pageable, user);
         } else {
-            return messageRepository.findAll(pageable);
+            return messageRepository.findAll(pageable, user);
         }
     }
 
-    public Page<Message> messageListForUser(Pageable pageable, User author) {
+    public Page<MessageDto> messageListForUser(Pageable pageable, User author, User currentUser) {
 
-        return messageRepository.findByUser(pageable, author);
+        return messageRepository.findByUser(pageable, author, currentUser);
     }
 }

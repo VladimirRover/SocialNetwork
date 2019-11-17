@@ -71,7 +71,7 @@ public class MessageControllerTest {
                 .param("tag", "new one")
                 .with(csrf());
 
-        mockMvc.perform(multipart)
+        mockMvc. perform(multipart)
                 .andDo(print())
                 .andExpect(authenticated())
                 .andExpect(xpath("//div[@id='messages-list']/div").nodeCount(5))
