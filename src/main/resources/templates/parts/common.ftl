@@ -32,6 +32,15 @@
                 height: 2px;
                 background-color: gray;
             }
+
+            .btn-primary{
+                background-color: lightslategray;
+                border-color: lightslategray;
+            }
+            .btn-primary:hover{
+                background-color: dimgray;
+                border-color: dimgray;
+            }
         </style>
     </head>
     <body>
